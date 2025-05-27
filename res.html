@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LEE | Resume</title>
+  
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Alpine.js -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+ [x-cloak] { display: none !important; }
+    .header {
+      background: #222;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    .header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    .typed {
+      color: #00b894;
+      font-weight: bold;
+    }
+
+    .section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      border-bottom: 2px solid #00b894;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+    }
+
+    .socials a {
+      margin: 0 10px;
+      font-size: 1.5em;
+      color: #333;
+    }
+
+    .gallery img {
+      width: 100%;
+      max-width: 200px;
+      margin: 10px;
+      border-radius: 8px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .dark-mode {
+      background: #121212;
+      color: #e0e0e0;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      background: #00b894;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body x-data="{ dark: false }" :class="{ 'dark-mode': dark }" x-cloak>
+
+  <button class="toggle-btn" @click="dark = !dark">
+    Toggle Theme
+  </button>
+
+  <div class="header" data-aos="fade-down">
+    <h1>LEE</h1>
+    <p class="typed" id="typed-text"></p>
+    <div class="socials" style="margin-top: 15px;">
+      <a href="https://github.com/yourgithub" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/yourlinkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="mailto:lee@example.com"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+
+  <div class="section" data-aos="fade-up">
+    <h2>About Me</h2>
+    <p>I'm an IT student with a passion for <strong>constant learning</strong>, <strong>technology exploration</strong>, and <strong>upskilling</strong>. I love solving problems and building things that create impact.</p>
+  </div>
+
+  <div class="section" data-aos="fade-up">
+    <h2>Skills</h2>
+    <canvas id="skillsChart" width="400" height="200"></canvas>
+  </div>
+
+  <div class="section" data-aos="fade-up">
+    <h2>Projects</h2>
+    <ul>
+      <li><strong>Supply Chain Management System:</strong> Full-stack project using Node.js + MongoDB.</li>
+      <li><strong>EasyCargo Website:</strong> Light cargo transport matching platform (HTML/CSS/JS).</li>
+      <li><strong>Deepfake Detector:</strong> GAN-based CNN model with Django frontend.</li>
+    </ul>
+  </div>
+
+  <div class="section" data-aos="fade-up">
+    <h2>Photo Gallery (Experience Highlights)</h2>
+    <div class="gallery">
+      <img src="https://via.placeholder.com/200x150.png?text=Internship" alt="Internship">
+      <img src="https://via.placeholder.com/200x150.png?text=Hackathon" alt="Hackathon">
+      <img src="https://via.placeholder.com/200x150.png?text=Workshop" alt="Workshop">
+      <img src="https://via.placeholder.com/200x150.png?text=IEEE+Event" alt="IEEE">
+    </div>
+  </div>
+
+  <div class="section" data-aos="fade-up">
+    <h2>Interests</h2>
+    <p>💻 Programming • 📊 Machine Learning • 🌍 Web Development • 🎨 UI/UX Design </p>
+  </div>
+
+  <script>
+    // Typed.js animation
+    var typed = new Typed("#typed-text", {
+      strings: ["IT Student", "Web Developer", "Passionate Learner", "Tech Enthusiast"],
+      typeSpeed: 50,
+      backSpeed: 30,
+      loop: true
+    });
+
+    // AOS animation
+    AOS.init();
+
+    // Chart.js for skills
+    const ctx = document.getElementById('skillsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'MongoDB', 'Python'],
+        datasets: [{
+          label: 'Skill Level (%)',
+          data: [90, 85, 80, 75, 70, 85],
+          backgroundColor: '#00b894'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
